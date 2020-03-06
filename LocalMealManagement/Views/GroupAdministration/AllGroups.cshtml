@@ -1,0 +1,41 @@
+﻿@model IList<LocalMealManagement.Models.Groups>
+
+@{
+    ViewData["Title"] = "AllGroups";
+}
+
+<h1>AllGroups</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Group Id
+            </th>
+            <th>
+                Group Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GroupId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GroupName)
+            </td>
+            <td>
+                @Html.ActionLink("ManageGroup" , "SpecificGroupTask", "GroupAdministration", new { groupId = item.GroupId  }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

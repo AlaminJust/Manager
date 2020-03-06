@@ -18,13 +18,13 @@ namespace LocalMealManagement.Controllers
         {
             _logger = logger;
         }
-        //[Authorize(Roles = ("Admin,Manager"))]
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var name = User.Identity.Name;
             return View();
         }
-        [Authorize(Policy = ("GAdmin"))]
+        [Authorize(Roles = ("Admin"))]
         public IActionResult Privacy()
         {
             return View();

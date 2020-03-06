@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using LocalMealManagement.Models;
 using LocalMealManagement.Secuirity;
+using LocalMealManagement.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,12 +36,13 @@ namespace LocalMealManagement
             services.AddControllersWithViews();
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("GAdmin", policy =>
+                options.AddPolicy("SuparAdmin", policy =>
                 {
                     policy.AddRequirements( new ManageAdminRollAndClaimsRequirement());
                 });
             });
-            services.AddSingleton<IAuthorizationHandler, IsGroupAdmin>();
+            services.AddScoped<IAuthorizationHandler, IsGroupAdmin>();
+            services.AddScoped<IGroupRepository, GroupRepository>();
             services.AddMvc();
         }
 

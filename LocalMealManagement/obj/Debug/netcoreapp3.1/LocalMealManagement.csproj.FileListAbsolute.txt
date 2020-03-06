@@ -2,7 +2,6 @@ C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\bin\Debug\ne
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\bin\Debug\netcoreapp3.1\LocalMealManagement.exe
-C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\LocalMealManagement.csprojAssemblyReference.cache
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\staticwebassets\LocalMealManagement.StaticWebAssets.Manifest.cache
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\staticwebassets\LocalMealManagement.StaticWebAssets.xml
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\LocalMealManagement.RazorAssemblyInfo.cache
@@ -141,10 +140,12 @@ C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\bin\Debug\ne
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\LocalMealManagement.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\Razor\Views\Users\Registration.cshtml.g.cs
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\Razor\Views\Users\Login.cshtml.g.cs
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\Razor\Views\Administration\CreateRole.cshtml.g.cs
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\Razor\Views\Administration\ListRoles.cshtml.g.cs
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\Razor\Views\Administration\EditUserInRole.cshtml.g.cs
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\Razor\Views\Administration\ManageUserClaims.cshtml.g.cs
+C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\Razor\Views\GroupAdministration\CreateGroup.cshtml.g.cs
+C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\Razor\Views\GroupAdministration\AllGroups.cshtml.g.cs
+C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\LocalMealManagement.MvcApplicationPartsAssemblyInfo.cache
