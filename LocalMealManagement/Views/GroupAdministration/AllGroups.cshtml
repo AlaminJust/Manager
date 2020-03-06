@@ -1,41 +1,31 @@
 ﻿@model IList<LocalMealManagement.Models.Groups>
 
-@{
-    ViewData["Title"] = "AllGroups";
-}
 
-<h1>AllGroups</h1>
+<div class="card-deck">
+    @foreach (var item in Model)
+    {
+        <div class="card lg-3">
+            <div class="card-header">
+                <h3>@item.GroupName</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <img class="card-img-top" src="~/Images/massgroup.jpg" style="width:100px; height:100px" />
+                    </div>
+                    <div class="col-sm-6">
+                        <h3>Alamin Hossain</h3>
+                    </div>
+                </div>
+            </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Group Id
-            </th>
-            <th>
-                Group Name
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.GroupId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GroupName)
-            </td>
-            <td>
-                @Html.ActionLink("ManageGroup" , "SpecificGroupTask", "GroupAdministration", new { groupId = item.GroupId  }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+            <div class="card-footer text-center">
+                <a asp-controller="GroupAdministration" asp-action="SpecificGroupTask" asp-route-groupId="@item.GroupId" class="btn btn-primary">ManageGroup</a>
+                <a asp-controller="ManageGroup" asp-action="AddMemberInGroup" asp-route-groupId="@item.GroupId" class="btn btn-primary">Add Member</a>
+                <a asp-controller="ManageGroup" asp-action="MembersInGroup" asp-route-groupId="@item.GroupId" class="btn btn-primary">Members</a>
+            </div>
+        </div>
+    }
+</div>
+
+

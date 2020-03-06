@@ -43,6 +43,7 @@ namespace LocalMealManagement
             });
             services.AddScoped<IAuthorizationHandler, IsGroupAdmin>();
             services.AddScoped<IGroupRepository, GroupRepository>();
+            services.AddScoped<IManageGroupRepository, ManageGroupRepository>();
             services.AddMvc();
         }
 

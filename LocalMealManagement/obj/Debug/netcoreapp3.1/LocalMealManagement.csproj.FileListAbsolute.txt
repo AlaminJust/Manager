@@ -149,3 +149,6 @@ C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\ne
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\Razor\Views\GroupAdministration\CreateGroup.cshtml.g.cs
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\Razor\Views\GroupAdministration\AllGroups.cshtml.g.cs
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\LocalMealManagement.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\LocalMealManagement.csprojAssemblyReference.cache
+C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\Razor\Views\ManageGroup\AddMemberInGroup.cshtml.g.cs
+C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\Razor\Views\ManageGroup\MembersInGroup.cshtml.g.cs

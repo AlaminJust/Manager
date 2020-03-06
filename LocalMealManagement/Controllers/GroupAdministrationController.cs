@@ -47,7 +47,7 @@ namespace LocalMealManagement.Controllers
         }
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> AllGroups()
+        public async Task<IActionResult>AllGroups()
         {
             var user = await userManager.FindByNameAsync(User.Identity.Name); 
             if(user == null)

@@ -13,6 +13,6 @@ namespace LocalMealManagement.Services
         public Task<Boolean> AssignUserInRole(string userName , string RoleName);
         public string GetGroupId(string groupName);
         public Task<List<Groups>> AllGroupOfUser(string UserName);
-        public void save();
+        public Task<Boolean> save();
     }
 }

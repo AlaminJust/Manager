@@ -31,7 +31,7 @@ namespace LocalMealManagement.Services
                 IdentityUser = users
             };
             await context.usersGroups.AddAsync(usersGroups);  // add user and group in usergroup table
-            save();
+            await save();
             return true;
         }
 
@@ -54,7 +54,7 @@ namespace LocalMealManagement.Services
             var user = await userManager.FindByNameAsync(userName);
             if (user == null) return false; // User Is not exist
             await userManager.AddToRoleAsync(user, RoleName);  // User Is assign his given role
-            save();
+            await save();
             return true;
         }
 
@@ -67,7 +67,7 @@ namespace LocalMealManagement.Services
                 GroupName = groupName
             };
             await context.groups.AddAsync(group);
-            save();
+            await save();
             return true;
         }
 
@@ -78,9 +78,10 @@ namespace LocalMealManagement.Services
             else return group.GroupId.ToString();
         }
 
-        public void save()
+        public async Task<Boolean> save()
         {
-            context.SaveChanges();
+            await context.SaveChangesAsync();
+            return true;
         }
     }
 }
