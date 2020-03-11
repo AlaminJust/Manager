@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LocalMealManagement.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -166,6 +166,30 @@ namespace LocalMealManagement.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "mealDetails",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Day = table.Column<string>(nullable: true),
+                    MonthWithYear = table.Column<string>(nullable: true),
+                    Lunch = table.Column<int>(nullable: true),
+                    Dinnar = table.Column<int>(nullable: true),
+                    Morning = table.Column<int>(nullable: true),
+                    IdentityUserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_mealDetails", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_mealDetails_AspNetUsers_IdentityUserId",
+                        column: x => x.IdentityUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "usersGroups",
                 columns: table => new
                 {
@@ -231,6 +255,11 @@ namespace LocalMealManagement.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_mealDetails_IdentityUserId",
+                table: "mealDetails",
+                column: "IdentityUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_usersGroups_GroupsGroupId",
                 table: "usersGroups",
                 column: "GroupsGroupId");
@@ -257,6 +286,9 @@ namespace LocalMealManagement.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "mealDetails");
 
             migrationBuilder.DropTable(
                 name: "usersGroups");

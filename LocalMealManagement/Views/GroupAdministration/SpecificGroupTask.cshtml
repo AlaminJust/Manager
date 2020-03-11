@@ -1,0 +1,31 @@
+﻿@model IEnumerable<LocalMealManagement.ViewModel.SubGroupViewModel>
+
+@{
+    ViewData["Title"] = "SpecificGroupTask";
+}
+
+<h1>SpecificGroupTask</h1>
+
+<p>
+    <a asp-action="CreateSubGroup" asp-route-groupId="@ViewBag.groupId">Create SubGroup</a>
+</p>
+<div class="container card-deck">
+    @foreach (var item in Model)
+    {
+
+        <div class="row justify-content-center">
+            <div class="col-auto mb-3">
+                <div class="card" style="width: 25rem;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-size:medium">SubGroupName: @item.SubGroupName</h5>
+                        <h6 class="card-subtitle mb-2" style="font-size:medium">Create Date: @item.SubGroupCreateDate.ToShortDateString()</h6>
+                        @*<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        *@
+                        <a asp-controller="GroupAdministration" asp-action="MealsFormate" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" class="card-link">Meal Functionality</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

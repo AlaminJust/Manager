@@ -33,7 +33,8 @@
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("KickOut", "KickOutUserFromGroup", "ManageGroup", new { userId = item.UserId, groupId = ViewBag.groupId }) | 
+                @Html.ActionLink("Leave", "KickOutUserFromGroup", "ManageGroup", new { userId = item.UserId, groupId = ViewBag.groupId })
             </td>
         </tr>
 }

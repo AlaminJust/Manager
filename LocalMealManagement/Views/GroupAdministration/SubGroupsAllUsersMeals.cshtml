@@ -1,0 +1,50 @@
+﻿@model IEnumerable<LocalMealManagement.ViewModel.MealModelWithUserNameView>
+
+@{
+    ViewData["Title"] = "SubGroupsAllUsersMeals";
+    var groupByUsername = from s in Model
+                          group s by s.UserName; 
+}
+
+<h1>SubGroupsAllUsersMeals</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lunch)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dinnar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Morning)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var userMeal in groupByUsername)
+        {
+            <tr>
+                <td>
+                    @userMeal.Key
+                </td>
+                @foreach (var meal in userMeal)
+                {
+                    <td>@meal.Morning</td>
+                    <td>@meal.Dinnar</td>
+                    <td>@meal.Lunch</td>
+                }
+
+            </tr>
+        }
+    </tbody>
+</table>

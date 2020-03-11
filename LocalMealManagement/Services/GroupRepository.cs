@@ -1,4 +1,5 @@
 ﻿using LocalMealManagement.Models;
+using LocalMealManagement.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace LocalMealManagement.Services
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
+
         public async Task<Boolean> AddMember(string userName, string groupId)
         {
             var groups = context.groups.Where(x => x.GroupId.ToString() == groupId).FirstOrDefault();
@@ -47,6 +49,20 @@ namespace LocalMealManagement.Services
                               GroupName = g.GroupName
                           }).ToList();
             return groups;
+        }
+        // Return All subgroup in a group
+        public List<SubGroupViewModel> AllSubGroupsInAGroup(string groupId)
+        {
+            var subgroups = (from g in context.groups
+                            join sg in context.subGroups on g.GroupId equals sg.Groups.GroupId
+                            where(g.GroupId.ToString() == groupId)
+                            select new SubGroupViewModel
+                            {
+                                SubGroupId = sg.Id,
+                                SubGroupName = sg.SubGroupName,
+                                SubGroupCreateDate = sg.CreateDate
+                            }).ToList();
+            return subgroups;
         }
 
         public async Task<Boolean> AssignUserInRole(string userName, string RoleName)

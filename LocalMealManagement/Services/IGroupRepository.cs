@@ -1,4 +1,5 @@
 ﻿using LocalMealManagement.Models;
+using LocalMealManagement.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace LocalMealManagement.Services
         public Task<Boolean> AssignUserInRole(string userName , string RoleName);
         public string GetGroupId(string groupName);
         public Task<List<Groups>> AllGroupOfUser(string UserName);
+        public List<SubGroupViewModel> AllSubGroupsInAGroup(string groupId); 
         public Task<Boolean> save();
+        
     }
 }

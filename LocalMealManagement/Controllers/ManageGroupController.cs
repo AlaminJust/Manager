@@ -17,7 +17,6 @@ namespace LocalMealManagement.Controllers
         public ManageGroupController(IManageGroupRepository manageGroupRepository)
         {
             this.manageGroupRepository = manageGroupRepository;
-
         }
         [HttpGet]
         [Authorize(Policy = "SuparAdmin")]
@@ -49,8 +48,23 @@ namespace LocalMealManagement.Controllers
         [Authorize(Policy = "SuparAdmin")]
         public IActionResult MembersInGroup(string groupId)
         {
+            ViewBag.groupId = groupId;
             var users = manageGroupRepository.UsersInGroup(groupId);
             return View(users);
+        }
+        [HttpGet]
+        [Authorize(Policy = "SuparAdmin")]
+        public async Task<IActionResult> KickOutUserFromGroup(string userId , int? groupId)
+        {
+            if(userId == null || groupId == null)
+            {
+                return BadRequest();
+            }
+            if (await manageGroupRepository.KickOutUser(userId, groupId))
+            {
+                return RedirectToAction("MembersInGroup" , new { groupId = groupId});
+            }
+            return BadRequest();
         }
     }
 }

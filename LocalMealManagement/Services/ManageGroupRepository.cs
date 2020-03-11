@@ -46,6 +46,30 @@ namespace LocalMealManagement.Services
             return result;
         }
 
+        public async Task<bool> KickOutUser(string userId, int? groupId)
+        {
+            if(userId == null || groupId == null)
+            {
+                return false;
+            }
+            var groupUsers = context.usersGroups.Where(x => x.IdentityUser.Id == userId && x.Groups.GroupId == groupId)
+                             .FirstOrDefault();
+
+            if(groupUsers == null)
+            {
+                return false;
+            }
+            context.usersGroups.Remove(groupUsers);
+            await Save();
+            return true;
+        }
+
+        public async Task<bool> Save()
+        {
+            await context.SaveChangesAsync();
+            return true;
+        }
+
         public List<UserViewModel> UsersInGroup(string groupId) 
         {
             var result = (from ug in context.usersGroups

@@ -1,0 +1,43 @@
+﻿@model LocalMealManagement.ViewModel.MealModelView
+
+@{
+    ViewData["Title"] = "UpdateMeals";
+}
+
+<h1>UpdateMeals</h1>
+
+<h4>MealModelView</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UpdateMeals">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Lunch" class="control-label"></label>
+                <input asp-for="Lunch" class="form-control" />
+                <span asp-validation-for="Lunch" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dinnar" class="control-label"></label>
+                <input asp-for="Dinnar" class="form-control" />
+                <span asp-validation-for="Dinnar" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Morning" class="control-label"></label>
+                <input asp-for="Morning" class="form-control" />
+                <span asp-validation-for="Morning" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-route-subGroupId="@ViewBag.subGroupId" asp-route-groupId="@ViewBag.groupId" asp-route-date="@ViewBag.dateTime" type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

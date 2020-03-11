@@ -16,5 +16,7 @@ namespace LocalMealManagement.Models
         }
         public DbSet<Groups> groups { get; set; } 
         public DbSet<UsersGroups> usersGroups { get; set; }
+        public DbSet<MealDetails> mealDetails { get; set; } 
+        public DbSet<SubGroups> subGroups { get; set; }  
     }
 }

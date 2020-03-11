@@ -4,14 +4,16 @@ using LocalMealManagement.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LocalMealManagement.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200309084946_FKSUBGROUPWITHGROUP")]
+    partial class FKSUBGROUPWITHGROUP
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,6 +45,9 @@ namespace LocalMealManagement.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Day")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("Dinnar")
                         .HasColumnType("int");
 
@@ -52,11 +57,11 @@ namespace LocalMealManagement.Migrations
                     b.Property<int?>("Lunch")
                         .HasColumnType("int");
 
+                    b.Property<string>("MonthWithYear")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("Morning")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("OrderDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<int?>("SubGroupsId")
                         .HasColumnType("int");
@@ -86,9 +91,6 @@ namespace LocalMealManagement.Migrations
                     b.Property<int?>("GroupsGroupId")
                         .HasColumnType("int");
 
-                    b.Property<string>("IdentityUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -98,8 +100,6 @@ namespace LocalMealManagement.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("GroupsGroupId");
-
-                    b.HasIndex("IdentityUserId");
 
                     b.ToTable("subGroups");
                 });
@@ -338,10 +338,6 @@ namespace LocalMealManagement.Migrations
                     b.HasOne("LocalMealManagement.Models.Groups", "Groups")
                         .WithMany()
                         .HasForeignKey("GroupsGroupId");
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
-                        .WithMany()
-                        .HasForeignKey("IdentityUserId");
                 });
 
             modelBuilder.Entity("LocalMealManagement.Models.UsersGroups", b =>

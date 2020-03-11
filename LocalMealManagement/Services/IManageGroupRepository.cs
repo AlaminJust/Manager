@@ -10,5 +10,7 @@ namespace LocalMealManagement.Services
     { 
         public Task<string> AddMemberInGroup(string groupId, string userName);
         public List<UserViewModel> UsersInGroup(string groupId);
+        public Task<Boolean> KickOutUser(string userId , int? groupId); 
+        public Task<Boolean> Save();
     }
 }
