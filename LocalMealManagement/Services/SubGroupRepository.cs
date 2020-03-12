@@ -104,6 +104,19 @@ namespace LocalMealManagement.Services
             return true;
         }
 
-        
+        public List<MealModelWithUserNameView> AllUsersMonthlyMeals(string subGroupId, DateTime date)
+        {
+            var allUsersMonthlyMeals = (from m in context.mealDetails
+                                       join sg in context.subGroups on m.SubGroups.Id equals sg.Id
+                                       where(sg.Id.ToString() == subGroupId && m.OrderDate.Month == date.Month && m.OrderDate.Year == date.Year)
+                                       select new MealModelWithUserNameView
+                                       {
+                                           Dinnar = m.Dinnar,
+                                           Lunch = m.Lunch,
+                                           Morning = m.Morning,
+                                           UserName = m.IdentityUser.UserName
+                                       }).ToList();
+            return allUsersMonthlyMeals;
+        }
     }
 }

@@ -200,6 +200,12 @@ namespace LocalMealManagement.Controllers
             var subGroupAllUserMeals = subGroupRepository.SubGroupAllUserMeals(subGroupId, date);
             return View(subGroupAllUserMeals);
         }
+        [HttpGet]
+        public IActionResult AllUsersMonthlyMeals(string groupId , string subGroupId , DateTime date)
+        {
+            var allUsersMonthlyMeals = subGroupRepository.AllUsersMonthlyMeals(subGroupId, date);
+            return View(allUsersMonthlyMeals);
+        }
 
     } 
 } 

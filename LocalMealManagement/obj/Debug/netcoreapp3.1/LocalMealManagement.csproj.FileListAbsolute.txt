@@ -159,3 +159,4 @@ C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\ne
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\Razor\Views\GroupAdministration\UpdateMeals.cshtml.g.cs
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\Razor\Views\GroupAdministration\ShowMeal.cshtml.g.cs
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\Razor\Views\GroupAdministration\SubGroupsAllUsersMeals.cshtml.g.cs
+C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\Razor\Views\GroupAdministration\AllUsersMonthlyMeals.cshtml.g.cs

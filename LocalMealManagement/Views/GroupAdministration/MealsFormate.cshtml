@@ -2,7 +2,8 @@
 
 @{
     ViewData["Title"] = "MealsFormate";
-
+    var subGroupId = "";
+    DateTime date = new DateTime(2020,1,1);
 
 }
 
@@ -11,9 +12,11 @@
 <h1>MealsFormate</h1>
 
 <div class="container card-deck">
-    @for(int i = 0; i<Model.Count; i++)
+    @for (int i = 0; i < Model.Count; i++)
     {
         var item = Model[i];
+        subGroupId = Model[i].SubGroupId;
+        date = Model[i].CurrentDay;
         <div class="row justify-content-center">
             <div class="col-auto mb-3">
                 <div class="card" style="width: 20rem;">
@@ -55,6 +58,7 @@
     }
 </div>
 
+<a asp-controller="GroupAdministration" asp-action="AllUsersMonthlyMeals" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@subGroupId" asp-route-date="@date" class="card-link">Monthly Meal List</a>
 
 
 <button id="button" onmousedown="Down()" onmouseup="UP() ">Hello</button>
@@ -72,7 +76,7 @@
         const end = event.currentTarget.selectionEnd;
         var x = document.getElementById("demo").textContent;
         var prev = x.substring(0, start - 1);
-        var next = x.substring(end , x.length);
+        var next = x.substring(end, x.length);
         var sub = x.substring(start, end);
         sub = sub.bold();
         document.getElementById("demo").textContent = prev + sub + next;
