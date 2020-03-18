@@ -22,6 +22,7 @@
                         @*<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         *@
                         <a asp-controller="GroupAdministration" asp-action="MealsFormate" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" class="card-link">Meal Functionality</a>
+                        <a asp-controller="ManageGroup" asp-action="MembersInGroup" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" class="card-link">Add Balance</a>
                         <a href="#" class="card-link">Another link</a>
                     </div>
                 </div>

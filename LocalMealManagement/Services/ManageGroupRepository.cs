@@ -70,14 +70,15 @@ namespace LocalMealManagement.Services
             return true;
         }
 
-        public List<UserViewModel> UsersInGroup(string groupId) 
+        public List<UserViewModel> UsersInGroup(string groupId , string subGroupId) 
         {
             var result = (from ug in context.usersGroups
                           where (ug.Groups.GroupId.ToString() == groupId)
                           select new UserViewModel
                           {
                               UserId = ug.IdentityUser.Id,
-                              UserName = ug.IdentityUser.UserName
+                              UserName = ug.IdentityUser.UserName,
+                              subGroupId = subGroupId
                           }).ToList();
             return result;
         }

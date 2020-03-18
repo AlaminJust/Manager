@@ -45,6 +45,7 @@ namespace LocalMealManagement
             services.AddScoped<IGroupRepository, GroupRepository>();
             services.AddScoped<IManageGroupRepository, ManageGroupRepository>();
             services.AddScoped<ISubGroupRepository, SubGroupRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddMvc();
         }
 

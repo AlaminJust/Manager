@@ -19,6 +19,37 @@ namespace LocalMealManagement.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("LocalMealManagement.Models.AccountBalance", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AddedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("IdentityUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("SubGroupsId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Taka")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdentityUserId");
+
+                    b.HasIndex("SubGroupsId");
+
+                    b.ToTable("accountBalance");
+                });
+
             modelBuilder.Entity("LocalMealManagement.Models.Groups", b =>
                 {
                     b.Property<int>("GroupId")
@@ -320,6 +351,17 @@ namespace LocalMealManagement.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("LocalMealManagement.Models.AccountBalance", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
+                        .WithMany()
+                        .HasForeignKey("IdentityUserId");
+
+                    b.HasOne("LocalMealManagement.Models.SubGroups", "SubGroups")
+                        .WithMany()
+                        .HasForeignKey("SubGroupsId");
                 });
 
             modelBuilder.Entity("LocalMealManagement.Models.MealDetails", b =>

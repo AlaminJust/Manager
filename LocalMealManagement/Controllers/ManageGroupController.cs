@@ -46,10 +46,11 @@ namespace LocalMealManagement.Controllers
         }
         [HttpGet]
         [Authorize(Policy = "SuparAdmin")]
-        public IActionResult MembersInGroup(string groupId)
+        public IActionResult MembersInGroup(string groupId, string subGroupId="NULL")
         {
             ViewBag.groupId = groupId;
-            var users = manageGroupRepository.UsersInGroup(groupId);
+            ViewBag.subGroupId = subGroupId;
+            var users = manageGroupRepository.UsersInGroup(groupId,subGroupId);
             return View(users);
         }
         [HttpGet]

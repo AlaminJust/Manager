@@ -7,25 +7,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - LocalMealManagement</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">LocalMealManagement</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"> LocalMealManagement</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon"> </span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"> Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy"> Privacy</a>
                         </li>
+                        <li class="nav-item"></li>
                     </ul>
                     <ul class="navber-nav ml-auto">
                         @if (signInManager.IsSignedIn(User))
@@ -41,11 +43,11 @@
                         else
                         {
                             <li class="nav-item">
-                                <a asp-action="login" asp-controller="Users" class="nav-link">Login</a>
+                                <a asp-action="login" asp-controller="Users" class="nav-link"> Login</a>
                             </li>
 
                             <li class="nav-item">
-                                <a asp-action="Registration" asp-controller="Users" class="nav-link">Registration</a>
+                                <a asp-action="Registration" asp-controller="Users" class="nav-link"> Registration</a>
                             </li>
 
                         }
@@ -62,7 +64,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - LocalMealManagement - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2020 - LocalMealManagement - <a asp-area="" asp-controller="Home" asp-action="Privacy"> Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

@@ -1,42 +1,101 @@
-﻿@model IEnumerable<LocalMealManagement.ViewModel.UserViewModel>
+﻿@model List<LocalMealManagement.ViewModel.UserViewModel>
 
-@{
-    ViewData["Title"] = "MembersInGroup";
-}
 
-<h1>MembersInGroup</h1>
+<html>
+<head>
+    <title>MembersInGroup</title>
+    <script src="~/js/balanceAdd.js"></script>
+</head>
+<body>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    UserId
+                </th>
+                <th>
+                    UserName
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                string groupId = @ViewBag.groupId;
+            }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @if (item.subGroupId != "NULL")
+                        {
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <input class="form-control" id=@item.UserName placeholder="Enter Balance" onkeyup="pulsar(this)" />
+                                </div>
+                                <div class="col-md-5">
+                                    <button class="btn btn-primary" onclick="saveBalance( '$@item.UserName' , '$@item.subGroupId', '$@ViewBag.groupId' )"> Submit </button>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            @Html.ActionLink("KickOut", "KickOutUserFromGroup", "ManageGroup", new { userId = item.UserId, groupId = ViewBag.groupId }); <span>|</span>
+                            @Html.ActionLink("Leave", "KickOutUserFromGroup", "ManageGroup", new { userId = item.UserId, groupId = ViewBag.groupId });
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserName)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("KickOut", "KickOutUserFromGroup", "ManageGroup", new { userId = item.UserId, groupId = ViewBag.groupId }) | 
-                @Html.ActionLink("Leave", "KickOutUserFromGroup", "ManageGroup", new { userId = item.UserId, groupId = ViewBag.groupId })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+    @*<script type="text/javascript">
+        function saveBalance(userName, subGroupId) {
+                if (!confirm("Are You Sure About this Action?")) return;
+                var UserName = "";
+                var subGroupID = "";
+                subGroupID = subGroupId;
+                UserName = userName;
+                var xx = document.getElementById(UserName.substring(1));
+                var AccountViewModel = {
+                    Taka: parseFloat(xx.value),
+                    groupId: @groupId,
+                    subGroupId: subGroupID.substring(1),
+                    UserName: UserName.substring(1)
+                };
+                xx.value = "0";
+                var jsonData = AccountViewModel;
+               // console.log(jsonData);
+                $.ajax({
+                    type: "POST",
+                    url: '/Account/AddBalance',
+                    data: { model: jsonData },
+                    datatype: AccountViewModel,
+                    success: function (response) {
+                        //console.log(response.userName);
+                        alert("Balanced Added Succesfully to " + response.userName);
+                       // console.log("Hello");
+                    },
+                    fail: function (response) {
+                        alert("Somethings Went Wrong!");
+                    }
+                })
+        };
+
+        function pulsar(obj) {
+            obj.value = Math.abs(parseFloat(obj.value));
+            console.log(obj.value);
+            if (obj.value == "NaN") obj.value = "0";
+        }
+
+    </script>*@
+</body>
+</html>
+
