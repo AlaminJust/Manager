@@ -118,5 +118,40 @@ namespace LocalMealManagement.Services
                                        }).ToList();
             return allUsersMonthlyMeals;
         }
+
+        public async Task<bool> AddCost(CostViewModel model, string subGroupId, string AddedBy)
+        {
+            var user = await userManager.FindByNameAsync(AddedBy);
+            var subGroups = context.subGroups.Where(x => x.Id.ToString() == subGroupId).FirstOrDefault();
+            if (user == null || subGroups == null) return false;
+            CostTable costTable = new CostTable()
+            {
+                description = model.Descriptions,
+                IdentityUser = user,
+                Date = DateTime.UtcNow,
+                SubGroups = subGroups,
+                Taka = model.Taka
+            };
+            context.costTables.Add(costTable);
+            await context.SaveChangesAsync();
+            return true;
+        }
+
+        public List<CostViewModelList> CostList(string subGroupId)
+        {
+            var result = (from subG in context.subGroups
+                          join Cot in context.costTables on subG.Id equals Cot.SubGroups.Id
+                          where (subG.Id.ToString() == subGroupId)
+                          select new CostViewModelList
+                          {
+                              Id = Cot.Id,
+                              Date = Cot.Date,
+                              Descriptions = Cot.description,
+                              IdentityUser = Cot.IdentityUser,
+                              SubGroups = Cot.SubGroups,
+                              Taka = Cot.Taka
+                          }).ToList();
+            return result;
+        }
     }
 }

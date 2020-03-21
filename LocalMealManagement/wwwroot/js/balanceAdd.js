@@ -1,7 +1,7 @@
 ﻿
 function saveBalance(userName, subGroupId, groupid) {
     if (!confirm("Are You Sure About this Action?")) return;
-    var xx = document.getElementById(UserName.substring(1));
+    var xx = document.getElementById(userName.substring(1));
     var AccountViewModel = {
         Taka: parseFloat(xx.value),
         groupId: groupid.substring(1),
@@ -21,7 +21,7 @@ function saveBalance(userName, subGroupId, groupid) {
             alert("Balanced Added Succesfully to " + response.userName);
             // console.log("Hello");
         },
-        fail: function (response) {
+        error: function (response) {
             alert("Somethings Went Wrong!");
         }
     })

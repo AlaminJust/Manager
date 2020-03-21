@@ -4,14 +4,16 @@ using LocalMealManagement.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LocalMealManagement.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200321172743_CostTableAdding")]
+    partial class CostTableAdding
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,37 +50,6 @@ namespace LocalMealManagement.Migrations
                     b.HasIndex("SubGroupsId");
 
                     b.ToTable("accountBalance");
-                });
-
-            modelBuilder.Entity("LocalMealManagement.Models.CostTable", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("IdentityUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int?>("SubGroupsId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Taka")
-                        .HasColumnType("float");
-
-                    b.Property<string>("description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdentityUserId");
-
-                    b.HasIndex("SubGroupsId");
-
-                    b.ToTable("costTables");
                 });
 
             modelBuilder.Entity("LocalMealManagement.Models.Groups", b =>
@@ -385,17 +356,6 @@ namespace LocalMealManagement.Migrations
                 });
 
             modelBuilder.Entity("LocalMealManagement.Models.AccountBalance", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
-                        .WithMany()
-                        .HasForeignKey("IdentityUserId");
-
-                    b.HasOne("LocalMealManagement.Models.SubGroups", "SubGroups")
-                        .WithMany()
-                        .HasForeignKey("SubGroupsId");
-                });
-
-            modelBuilder.Entity("LocalMealManagement.Models.CostTable", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()

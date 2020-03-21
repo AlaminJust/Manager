@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/js/Login.js"></script>
 </head>
 <body>
     <header>
@@ -27,29 +28,42 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy"> Privacy</a>
                         </li>
-                        <li class="nav-item"></li>
-                    </ul>
-                    <ul class="navber-nav ml-auto">
+
                         @if (signInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
-                                <form method="post" asp-controller="Users" asp-action="logout">
-                                    <button type="submit" class="nav-link btn btn-link py-0" style="width:auto">
-                                        Logout @User.Identity.Name
-                                    </button>
-                                </form>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="GroupAdministration" asp-action="AllGroups">Group</a>
+                            </li>
+                        }
+
+
+                    </ul>
+                </div>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1 justify-content-end">
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Users" asp-action="Logout"> LogOut </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark"> @User.Identity.Name </a>
                             </li>
                         }
                         else
                         {
-                            <li class="nav-item">
-                                <a asp-action="login" asp-controller="Users" class="nav-link"> Login</a>
+                            <li class="nav-item ">
+                                <input id="username" class="nav-link form-control" placeholder="Username" />
                             </li>
-
                             <li class="nav-item">
-                                <a asp-action="Registration" asp-controller="Users" class="nav-link"> Registration</a>
+                                <input id="password" class="nav-link form-control" placeholder="Password" />
                             </li>
-
+                            <li class="nav-item">
+                                <button id="login" class="nav-link form-control btn btn-primary" onclick="Login()">Login</button>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link text-dark" asp-controller="Users" asp-action="Registration"> SignUp </a>
+                            </li>
                         }
                     </ul>
                 </div>

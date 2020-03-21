@@ -160,3 +160,5 @@ C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\ne
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\Razor\Views\GroupAdministration\SubGroupsAllUsersMeals.cshtml.g.cs
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\Razor\Views\GroupAdministration\AllUsersMonthlyMeals.cshtml.g.cs
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\LocalMealManagement.csprojAssemblyReference.cache
+C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\Razor\Views\GroupAdministration\AddCost.cshtml.g.cs
+C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Debug\netcoreapp3.1\Razor\Views\ManageGroup\CostList.cshtml.g.cs

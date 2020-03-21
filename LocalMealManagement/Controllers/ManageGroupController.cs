@@ -14,9 +14,11 @@ namespace LocalMealManagement.Controllers
     public class ManageGroupController : Controller
     {
         private readonly IManageGroupRepository manageGroupRepository;
-        public ManageGroupController(IManageGroupRepository manageGroupRepository)
+        private readonly ISubGroupRepository subGroupRepository;
+        public ManageGroupController(IManageGroupRepository manageGroupRepository , ISubGroupRepository subGroupRepository)
         {
             this.manageGroupRepository = manageGroupRepository;
+            this.subGroupRepository = subGroupRepository;
         }
         [HttpGet]
         [Authorize(Policy = "SuparAdmin")]
@@ -67,5 +69,12 @@ namespace LocalMealManagement.Controllers
             }
             return BadRequest();
         }
+        
+        public IActionResult CostList(string groupId , string subGroupId)
+        {
+            var costList = subGroupRepository.CostList(subGroupId);
+            return View(costList); 
+        }
+
     }
 }

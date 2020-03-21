@@ -59,12 +59,15 @@ namespace LocalMealManagement.Controllers
             if (ModelState.IsValid)
             {
                 var signedUser = await userManager.FindByEmailAsync(model.Email);
-                var result = await signInManager.PasswordSignInAsync(signedUser.UserName, model.Password, model.RememberMe, false);
+                var result = await signInManager.PasswordSignInAsync(signedUser.UserName, model.Password, true, false);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("index", "home");
+                    return Json(new { result = "Redirect", url = Url.Action("index", "home") });
                 }
-                ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
+                else
+                {
+                    return BadRequest();
+                }
             }
             return View(model);
         }

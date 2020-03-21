@@ -206,6 +206,28 @@ namespace LocalMealManagement.Controllers
             var allUsersMonthlyMeals = subGroupRepository.AllUsersMonthlyMeals(subGroupId, date);
             return View(allUsersMonthlyMeals);
         }
+        public IActionResult AddCost(string groupId , string subGroupId)
+        {
+            ViewBag.groupId = groupId;
+            ViewBag.subGroupId = subGroupId;
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddCost(CostViewModel model , string groupId , string subGroupId)
+        {
+            if (ModelState.IsValid)
+            {
+               if(await subGroupRepository.AddCost(model, subGroupId, User.Identity.Name))
+                {
+                    return View();
+                }
+                else
+                {
+                    ModelState.AddModelError("","Something Went Wrong!");
+                }
+            }
+            return View();
+        }
 
     } 
 } 
