@@ -1,47 +1,45 @@
 ﻿@model IEnumerable<LocalMealManagement.ViewModel.SubGroupViewModel>
 
-@{
-    ViewData["Title"] = "SpecificGroupTask";
-}
-
-<h1>SpecificGroupTask</h1>
-
-<p>
-    <a asp-action="CreateSubGroup" asp-route-groupId="@ViewBag.groupId">Create SubGroup</a>
-</p>
-<div class="container card-deck">
+<div class="container">
+    <a asp-action="CreateSubGroup" asp-route-groupId="@ViewBag.groupId"  style="background-color:powderblue; margin-bottom:5px; float:right; position:relative; right:61px"><i class="fa fa-plus mr-2" aria-hidden="true" title="Create SubGroup"></i>Create SubGroup</a>
+</div>
+<div class="container card-deck ">
     @foreach (var item in Model)
     {
-
         <div class="row justify-content-center">
             <div class="col-auto mb-3">
-                <div class="card" style="width: 25rem;">
+                <div class="card" style="width: 20rem;">
                     <div class="card-header">
                         <div class="row">
-                            <div class="col-md-8">
-                                <h5 class="card-title" style="font-size:medium;">@item.SubGroupName</h5>
+                            <div class="col-md-7">
+                                <h5 class="card-title" style="font-size:medium;"><i class="fas fa-layer-group" style=" margin-right:3px"></i>@item.SubGroupName</h5>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <h6 class="card-subtitle mb-2" style="font-size:medium"><i class="fa fa-calendar" aria-hidden="true"></i> @item.SubGroupCreateDate.ToShortDateString()</h6>
                             </div>
                         </div>
 
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title" style="font-size:medium">@item.SubGroupName</h5>
-                        <h6 class="card-subtitle mb-2" style="font-size:medium">Create Date: @item.SubGroupCreateDate.ToShortDateString()</h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="card-title" style="font-size:medium"><i class="fa fa-calendar" aria-hidden="true" style="margin:3px" title="Meal start Time"></i>@item.startDate.ToShortTimeString()</h5>
+                                <h6 class="card-subtitle mb-2" style="font-size:medium"><i class="fa fa-calendar" aria-hidden="true" style="margin:3px" title="Meal End Time"></i>@item.EndDate.ToShortTimeString()</h6>
+                            </div>
+                        </div>
                         @*<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         *@
                     </div>
                     <div class="card-footer text-center">
-                        <a asp-controller="GroupAdministration" asp-action="MealsFormate" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" class="card-link">Meal Functionality</a>
+                        <a asp-controller="GroupAdministration" asp-action="MealsFormate" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" class="card-link" title="Meal Functionality"><i class='fas fa-users'></i></a>
                         <a asp-controller="ManageGroup" asp-action="MembersInGroup" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" class="card-link" title="Add Balance to members"><i class="fa fa-money" aria-hidden="true"></i></a>
                         <a asp-controller="GroupAdministration" asp-action="AddCost" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" class="card-link" title="Add All Cost Of management"><i class="fa fa-usd" aria-hidden="true"></i></a>
-                        <a asp-controller="ManageGroup" asp-action="CostList" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" class="card-link">Cost List</a>
-                        
+                        <a asp-controller="ManageGroup" asp-action="CostList" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" class="card-link" title="Cost List"><i class="fas fa-list"></i></a>
+                        <a asp-controller="GroupAdministration" asp-action="AllUsersMonthlyMeals" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" asp-route-date="@item.SubGroupCreateDate" class="card-link"><i class="fas fa-hamburger" title="Monthly Meal List"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     }
 </div>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>

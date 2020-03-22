@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<LocalMealManagement.ViewModel.MealModelWithUserNameView>
 
 @{
-    ViewData["Title"] = "SubGroupsAllUsersMeals";
+    double Dinnar = 0, Lunch = 0, Morning = 0;
     var groupByUsername = from s in Model
-                          group s by s.UserName
+                          group s by s.IdentityUser.UserName
                           into g
                           select new
                           {
@@ -14,27 +14,13 @@
                           };
 }
 
-<h1>SubGroupsAllUsersMeals</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<table class="table table-bordered table-striped">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Lunch)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Dinnar)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Morning)
-            </th>
-            <th></th>
+            <th>Username</th>
+            <th>Morning</th>
+            <th>Dinnar</th>
+            <th>Lunch</th>
         </tr>
     </thead>
     <tbody>
@@ -47,6 +33,17 @@
                 <td>@meal.Dinnar</td>
                 <td>@meal.Lunch</td>
             </tr>
+            Dinnar += (double)meal.Dinnar;
+            Lunch += (double)meal.Lunch;
+            Morning += (double)meal.Morning;
         }
     </tbody>
+    <tfoot>
+        <tr>
+            <th>Username</th>
+            <th>@Morning</th>
+            <th>@Dinnar</th>
+            <th>@Lunch</th>
+        </tr>
+    </tfoot>
 </table>

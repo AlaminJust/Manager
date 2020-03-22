@@ -9,6 +9,8 @@ namespace LocalMealManagement.ViewModel
     { 
         public int SubGroupId { get; set; } 
         public string SubGroupName { get; set; } 
-        public DateTime SubGroupCreateDate { get; set; } 
+        public DateTime SubGroupCreateDate { get; set; }
+        public DateTime startDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 }

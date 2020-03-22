@@ -60,7 +60,9 @@ namespace LocalMealManagement.Services
                             {
                                 SubGroupId = sg.Id,
                                 SubGroupName = sg.SubGroupName,
-                                SubGroupCreateDate = sg.CreateDate
+                                SubGroupCreateDate = sg.CreateDate,
+                                startDate = (DateTime)sg.StartDate,
+                                EndDate = (DateTime)sg.EndDate
                             }).ToList();
             return subgroups;
         }

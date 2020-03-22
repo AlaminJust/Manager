@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -17,6 +18,6 @@ namespace LocalMealManagement.ViewModel
 
     public class MealModelWithUserNameView : MealModelView
     {
-        public string UserName { get; set; } 
+        public IdentityUser IdentityUser { get; set; }  
     }
 }

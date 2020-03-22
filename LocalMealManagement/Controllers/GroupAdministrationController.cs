@@ -190,7 +190,7 @@ namespace LocalMealManagement.Controllers
                     Morning = 0
                 };
             }
-            return View(mealDetails);
+            return Ok( mealDetails );
         }
 
         // To show specific subgroups All users meals

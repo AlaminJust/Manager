@@ -93,7 +93,7 @@ namespace LocalMealManagement.Services
                                               Dinnar = m.Dinnar,
                                               Lunch = m.Lunch,
                                               Morning = m.Morning,
-                                              UserName = m.IdentityUser.UserName
+                                              IdentityUser = m.IdentityUser
                                           }).ToList();
                        
             return AllUsersMealInSubGroup;
@@ -108,13 +108,13 @@ namespace LocalMealManagement.Services
         {
             var allUsersMonthlyMeals = (from m in context.mealDetails
                                        join sg in context.subGroups on m.SubGroups.Id equals sg.Id
-                                       where(sg.Id.ToString() == subGroupId && m.OrderDate.Month == date.Month && m.OrderDate.Year == date.Year)
+                                       where(sg.Id.ToString() == subGroupId)
                                        select new MealModelWithUserNameView
                                        {
                                            Dinnar = m.Dinnar,
                                            Lunch = m.Lunch,
                                            Morning = m.Morning,
-                                           UserName = m.IdentityUser.UserName
+                                           IdentityUser = m.IdentityUser 
                                        }).ToList();
             return allUsersMonthlyMeals;
         }

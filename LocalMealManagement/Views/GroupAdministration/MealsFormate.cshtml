@@ -1,16 +1,14 @@
 ﻿@model List<LocalMealManagement.ViewModel.SubGroupMonthlyViewModel>
 
 @{
-    ViewData["Title"] = "MealsFormate";
     var subGroupId = "";
-    DateTime date = new DateTime(2020,1,1);
-
+    DateTime date = new DateTime(2020, 1, 1);
 }
 
 
-
-<h1>MealsFormate</h1>
-
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<script src="~/js/MealDetails.js"></script>
+<hr style="border:2px solid"/>
 <div class="container card-deck">
     @for (int i = 0; i < Model.Count; i++)
     {
@@ -19,14 +17,23 @@
         date = Model[i].CurrentDay;
         <div class="row justify-content-center">
             <div class="col-auto mb-3">
-                <div class="card" style="width: 20rem;">
+                <div class="card" style="width: 19rem;">
+                    <div class="card-header">
+                        <h5 class="card-title" style="font-size:medium"><i class="fa fa-calendar mr-1" aria-hidden="true" title="Date"></i>@item.CurrentDay.ToLongDateString()</h5>
+                    </div>
                     <div class="card-body">
-                        <h5 class="card-title" style="font-size:medium">Date: @item.CurrentDay.ToLongDateString()</h5>
+
                         <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <a asp-controller="GroupAdministration" asp-action="AddMeals" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" asp-route-date="@Model[i].CurrentDay.Date" class="card-link">Add Meal</a>
-                        <a asp-controller="GroupAdministration" asp-action="UpdateMeals" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" asp-route-date="@Model[i].CurrentDay.Date" class="card-link">Update Meal</a>
-                        <a asp-controller="GroupAdministration" asp-action="ShowMeal" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" asp-route-date="@Model[i].CurrentDay.Date" class="card-link">Show Meal</a>
-                        <a asp-controller="GroupAdministration" asp-action="SubGroupsAllUsersMeals" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" asp-route-date="@Model[i].CurrentDay.Date" class="card-link">Meal List</a>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a asp-controller="GroupAdministration" asp-action="AddMeals" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" asp-route-date="@Model[i].CurrentDay.Date" class="card-link"><i class="fa fa-plus" aria-hidden="true" title="Add Meal"></i></a>
+                        <a asp-controller="GroupAdministration" asp-action="UpdateMeals" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" asp-route-date="@Model[i].CurrentDay.Date" class="card-link"><i class="fas fa-edit" title="Update Meal"></i></a>
+                        @*<a asp-controller="GroupAdministration" asp-action="ShowMeal" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" asp-route-date="@Model[i].CurrentDay.Date" class="card-link"><i class="fas fa-eye" title="Show meal"></i></a>*@
+                        <a href="javascript:show( '$@item.SubGroupId', '$@ViewBag.groupId' , '$@Model[i].CurrentDay' )" class="card-link"><i class="fas fa-eye" title="Show meal"></i></a>
+
+
+                        <a asp-controller="GroupAdministration" asp-action="SubGroupsAllUsersMeals" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" asp-route-date="@Model[i].CurrentDay.Date" class="card-link"><i class="fas fa-list" title="Meal List"></i></a>
+
                     </div>
                 </div>
             </div>
@@ -58,63 +65,60 @@
     }
 </div>
 
-<a asp-controller="GroupAdministration" asp-action="AllUsersMonthlyMeals" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@subGroupId" asp-route-date="@date" class="card-link">Monthly Meal List</a>
+@*<button id="button" onmousedown="Down()" onmouseup="UP() ">Hello</button>
 
-
-<button id="button" onmousedown="Down()" onmouseup="UP() ">Hello</button>
-
-<button id="button" onmousedown="getSelectionText()">Selected Text</button>
+    <button id="button" onmousedown="getSelectionText()">Selected Text</button>
 
 
 
-<div id="demo" onmousedown="myFunction(event)">I am a student and I want to become a good person</div>
+    <div id="demo" onmousedown="myFunction(event)">I am a student and I want to become a good person</div>
 
 
-<script>
-    function myFunction(event) {
-        const start = event.currentTarget.selectionStart;
-        const end = event.currentTarget.selectionEnd;
-        var x = document.getElementById("demo").textContent;
-        var prev = x.substring(0, start - 1);
-        var next = x.substring(end, x.length);
-        var sub = x.substring(start, end);
-        sub = sub.bold();
-        document.getElementById("demo").textContent = prev + sub + next;
-        x = prev + sub + next;
-        alert(x);
-    }
-</script>
-
-
-<script type="text/javascript">
-    var longpress = false;
-    function Call() {
-        console.log("Hello I AM here");
-    }
-    $("button").on('click', function () {
-        (longpress) ? alert("Long Press") : alert("Short Press");
-    });
-
-    var startTime, endTime;
-    function Down() {
-        startTime = new Date().getTime();
-        console.log(startTime);
-    };
-
-    function UP() {
-        endTime = new Date().getTime();
-        longpress = (endTime - startTime < 2000) ? false : true;
-        console.log(startTime, " ", endTime, " ", longpress);
-    };
-
-    function getSelectionText() {
-        var text = "";
-        if (window.getSelection) {
-            text = window.getSelection().toString();
-        } else if (document.selection && document.selection.type != "Control") {
-            text = document.selection.createRange().text;
+    <script>
+        function myFunction(event) {
+            const start = event.currentTarget.selectionStart;
+            const end = event.currentTarget.selectionEnd;
+            var x = document.getElementById("demo").textContent;
+            var prev = x.substring(0, start - 1);
+            var next = x.substring(end, x.length);
+            var sub = x.substring(start, end);
+            sub = sub.bold();
+            document.getElementById("demo").textContent = prev + sub + next;
+            x = prev + sub + next;
+            alert(x);
         }
-        console.log(text);
-        return text;
-    }
-</script>
+    </script>
+
+
+    <script type="text/javascript">
+        var longpress = false;
+        function Call() {
+            console.log("Hello I AM here");
+        }
+        $("button").on('click', function () {
+            (longpress) ? alert("Long Press") : alert("Short Press");
+        });
+
+        var startTime, endTime;
+        function Down() {
+            startTime = new Date().getTime();
+            console.log(startTime);
+        };
+
+        function UP() {
+            endTime = new Date().getTime();
+            longpress = (endTime - startTime < 2000) ? false : true;
+            console.log(startTime, " ", endTime, " ", longpress);
+        };
+
+        function getSelectionText() {
+            var text = "";
+            if (window.getSelection) {
+                text = window.getSelection().toString();
+            } else if (document.selection && document.selection.type != "Control") {
+                text = document.selection.createRange().text;
+            }
+            console.log(text);
+            return text;
+        }
+    </script>*@
