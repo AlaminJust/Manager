@@ -21,11 +21,11 @@ namespace LocalMealManagement.Services
             this.signInManager = signInManager;
         }
 
-        public async Task<bool> AddMeal(MealModelView model, string subGroupId, string userName , DateTime date)
+        public async Task<bool> AddMeal(MealModelView model, string subGroupId, string userName, DateTime date)
         {
             var user = await userManager.FindByNameAsync(userName);
             var subGroup = context.subGroups.Where(x => x.Id.ToString() == subGroupId).FirstOrDefault();
-            if(user == null || subGroup == null)
+            if (user == null || subGroup == null)
             {
                 return false;
             }
@@ -54,7 +54,7 @@ namespace LocalMealManagement.Services
         public MealModelView ShowMeal(string subGroupId, string userName, DateTime date)
         {
             var mealDetailsShow = context.mealDetails.Where(x => x.SubGroups.Id.ToString() == subGroupId && x.IdentityUser.UserName == userName && x.OrderDate == date).FirstOrDefault();
-            if(mealDetailsShow == null)
+            if (mealDetailsShow == null)
             {
                 return null;
             }
@@ -67,7 +67,7 @@ namespace LocalMealManagement.Services
             return mealModelView;
         }
 
-        public async Task<bool> AddSubGroup(string userName , string groupId, CreateSubgroupViewModel model)
+        public async Task<bool> AddSubGroup(string userName, string groupId, CreateSubgroupViewModel model)
         {
             var groups = context.groups.Where(x => x.GroupId.ToString() == groupId).FirstOrDefault();
             var user = await userManager.FindByNameAsync(userName);
@@ -95,7 +95,7 @@ namespace LocalMealManagement.Services
                                               Morning = m.Morning,
                                               IdentityUser = m.IdentityUser
                                           }).ToList();
-                       
+
             return AllUsersMealInSubGroup;
         }
         public async Task<bool> Save()
@@ -107,15 +107,15 @@ namespace LocalMealManagement.Services
         public List<MealModelWithUserNameView> AllUsersMonthlyMeals(string subGroupId, DateTime date)
         {
             var allUsersMonthlyMeals = (from m in context.mealDetails
-                                       join sg in context.subGroups on m.SubGroups.Id equals sg.Id
-                                       where(sg.Id.ToString() == subGroupId)
-                                       select new MealModelWithUserNameView
-                                       {
-                                           Dinnar = m.Dinnar,
-                                           Lunch = m.Lunch,
-                                           Morning = m.Morning,
-                                           IdentityUser = m.IdentityUser 
-                                       }).ToList();
+                                        join sg in context.subGroups on m.SubGroups.Id equals sg.Id
+                                        where (sg.Id.ToString() == subGroupId)
+                                        select new MealModelWithUserNameView
+                                        {
+                                            Dinnar = m.Dinnar,
+                                            Lunch = m.Lunch,
+                                            Morning = m.Morning,
+                                            IdentityUser = m.IdentityUser
+                                        }).ToList();
             return allUsersMonthlyMeals;
         }
 
@@ -151,6 +151,43 @@ namespace LocalMealManagement.Services
                               SubGroups = Cot.SubGroups,
                               Taka = Cot.Taka
                           }).ToList();
+            return result;
+        }
+
+        public List<AllCalculation> allCalculations(string subGroupId)
+        {
+            var costlist = CostList(subGroupId);
+            double TotCost = 0; 
+            foreach(var cost in costlist)
+            {
+                TotCost += cost.Taka;
+            }
+            var result = (from m in context.mealDetails
+                          join sg in context.subGroups on m.SubGroups.Id equals sg.Id
+                          where (sg.Id.ToString() == subGroupId)
+                          select new AllCalculation
+                          {
+                              Dinnar = (double)m.Dinnar,
+                              Lunch = (double)m.Lunch,
+                              Morning = (double)m.Morning,
+                              identityUser = m.IdentityUser,
+                              Taka = 0.0,
+                              TotalCost = TotCost
+                          }).ToList();
+
+            var result1 = (from ac in context.accountBalance
+                          join sg in context.subGroups on ac.SubGroups.Id equals sg.Id
+                          where (sg.Id.ToString() == subGroupId)
+                          select new AllCalculation
+                          {
+                              Dinnar = 0,
+                              Lunch = 0,
+                              Morning = 0,
+                              identityUser = ac.IdentityUser,
+                              Taka = ac.Taka,
+                              TotalCost = TotCost
+                          }).ToList();
+            result.AddRange(result1);
             return result;
         }
     }

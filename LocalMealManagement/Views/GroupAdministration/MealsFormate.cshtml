@@ -17,7 +17,7 @@
         date = Model[i].CurrentDay;
         <div class="row justify-content-center">
             <div class="col-auto mb-3">
-                <div class="card" style="width: 19rem;">
+                <div class="card shadow" style="width: 19rem; border-radius:30%">
                     <div class="card-header">
                         <h5 class="card-title" style="font-size:medium"><i class="fa fa-calendar mr-1" aria-hidden="true" title="Date"></i>@item.CurrentDay.ToLongDateString()</h5>
                     </div>
@@ -29,11 +29,8 @@
                         <a asp-controller="GroupAdministration" asp-action="AddMeals" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" asp-route-date="@Model[i].CurrentDay.Date" class="card-link"><i class="fa fa-plus" aria-hidden="true" title="Add Meal"></i></a>
                         <a asp-controller="GroupAdministration" asp-action="UpdateMeals" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" asp-route-date="@Model[i].CurrentDay.Date" class="card-link"><i class="fas fa-edit" title="Update Meal"></i></a>
                         @*<a asp-controller="GroupAdministration" asp-action="ShowMeal" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" asp-route-date="@Model[i].CurrentDay.Date" class="card-link"><i class="fas fa-eye" title="Show meal"></i></a>*@
-                        <a href="javascript:show( '$@item.SubGroupId', '$@ViewBag.groupId' , '$@Model[i].CurrentDay' )" class="card-link"><i class="fas fa-eye" title="Show meal"></i></a>
-
-
+                        <a href="javascript:show('$@item.SubGroupId','$@ViewBag.groupId','$@Model[i].CurrentDay')" class="card-link"><i class="fas fa-eye" title="Show meal"></i></a>
                         <a asp-controller="GroupAdministration" asp-action="SubGroupsAllUsersMeals" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" asp-route-date="@Model[i].CurrentDay.Date" class="card-link"><i class="fas fa-list" title="Meal List"></i></a>
-
                     </div>
                 </div>
             </div>

@@ -1,16 +1,9 @@
 ﻿@model LocalMealManagement.ViewModel.CostViewModel
 
-@{
-    ViewData["Title"] = "AddCost";
-}
-
-<h1>AddCost</h1>
-
-<h4>CostViewModel</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="AddCost">
+    <div class="col-md-4 offset-md-4">
+        <form asp-action="AddCost" class="shadow p-2" style="border-radius:10px">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Descriptions" class="control-label"></label>
@@ -22,15 +15,11 @@
                 <input asp-for="Taka" class="form-control" />
                 <span asp-validation-for="Taka" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group offset-5" style="position:relative; right:9px">
                 <input asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@ViewBag.subGroupId" a type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

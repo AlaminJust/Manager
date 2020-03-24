@@ -11,6 +11,7 @@ namespace LocalMealManagement.ViewModel
     public class CostViewModel
     {
         [Required]
+        [RegularExpression("^.{1,30}$", ErrorMessage = "Characture must be between 1 to 30.")]
         public string Descriptions { get; set; }
         [Required]
         public double Taka { get; set; }

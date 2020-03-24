@@ -1,0 +1,77 @@
+﻿@model IEnumerable<LocalMealManagement.ViewModel.AllCalculation>
+
+@{
+    ViewData["Title"] = "AllCalculation";
+}
+
+@{
+    double Dinnar = 0, Lunch = 0, Morning = 0, TotalMeal = 0, mealRate = 0, TotCost = 0 , Liability = 0 , Balance = 0;
+    var groupByUsername = from s in Model
+                          group s by s.identityUser.UserName
+                          into g
+                          select new
+                          {
+                              UserName = g.Key,
+                              Dinnar = g.Sum(x => x.Dinnar),
+                              Lunch = g.Sum(x => x.Lunch),
+                              Morning = g.Sum(x => x.Morning),
+                              Taka = g.Sum(x => x.Taka),
+                              TotalCost = g.Max(x => x.TotalCost)
+                          };
+    foreach (var res in groupByUsername)
+    {
+        Dinnar += res.Dinnar;
+        Morning += res.Morning;
+        Lunch += res.Lunch;
+        TotCost = res.TotalCost;
+        Balance += res.Taka;
+    }
+    TotalMeal = Dinnar + Morning + Lunch;
+    mealRate = (TotCost / TotalMeal);
+}
+<div>
+    <p>Meal Rate : @mealRate</p>
+</div>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Morning</th>
+            <th>Lunch</th>
+            <th>Dinnar</th>
+            <th>TotalMeal</th>
+            <th>Balance</th>
+            <th>TotalCost</th>
+            <th>Liability</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in groupByUsername)
+        {
+            <tr>
+                <td>@item.UserName</td>
+                <td>@item.Morning</td>
+                <td>@item.Lunch</td>
+                <td>@item.Dinnar</td>
+                <td>@(item.Morning + item.Lunch + item.Dinnar)</td>
+                <td>@item.Taka</td>
+                <td>@(mealRate*(item.Morning+item.Lunch+item.Dinnar))</td>
+                <td>@(item.Taka - (mealRate * (item.Morning + item.Lunch + item.Dinnar)))</td>
+            </tr>
+            Liability += (item.Taka - (mealRate * (item.Morning + item.Lunch + item.Dinnar)));
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Username</th>
+            <th>@Morning</th>
+            <th>@Lunch</th>
+            <th>@Dinnar</th>
+            <th>@TotalMeal</th>
+            <th>@Balance</th>
+            <th>@TotCost</th>
+            <th>@Liability</th>
+        </tr>
+    </tfoot>
+</table>

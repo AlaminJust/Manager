@@ -69,11 +69,17 @@ namespace LocalMealManagement.Controllers
             }
             return BadRequest();
         }
-        
+        [HttpGet]
         public IActionResult CostList(string groupId , string subGroupId)
         {
             var costList = subGroupRepository.CostList(subGroupId);
             return View(costList); 
+        }
+        [HttpGet]
+        public IActionResult AllCalculation(string groupId , string subGroupId)
+        {
+            var allCalculation = subGroupRepository.allCalculations(subGroupId);
+            return View(allCalculation);
         }
 
     }
