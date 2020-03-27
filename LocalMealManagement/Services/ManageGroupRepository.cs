@@ -12,15 +12,18 @@ namespace LocalMealManagement.Services
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly AppDbContext context;
         private readonly IGroupRepository groupRepository;
         public ManageGroupRepository(UserManager<IdentityUser> userManager, AppDbContext context,
-                     IGroupRepository groupRepository, SignInManager<IdentityUser> signInManager)
+                     IGroupRepository groupRepository, SignInManager<IdentityUser> signInManager,
+                     RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.groupRepository = groupRepository;
             this.context = context;
+            this.roleManager = roleManager;
 
         }
         public async Task<string> AddMemberInGroup(string groupId, string userName)
@@ -43,6 +46,7 @@ namespace LocalMealManagement.Services
                 result = "Somethings went wrong check it carefully!";
                 return result;
             }
+            await groupRepository.AssignUserInGroupRole(userName, "Member", groupId);
             return result;
         }
 
@@ -64,11 +68,7 @@ namespace LocalMealManagement.Services
             return true;
         }
 
-        public async Task<bool> Save()
-        {
-            await context.SaveChangesAsync();
-            return true;
-        }
+       
 
         public List<UserViewModel> UsersInGroup(string groupId , string subGroupId) 
         {
@@ -81,6 +81,12 @@ namespace LocalMealManagement.Services
                               subGroupId = subGroupId
                           }).ToList();
             return result;
+        }
+
+        public async Task<bool> Save()
+        {
+            await context.SaveChangesAsync();
+            return true;
         }
     }
 }

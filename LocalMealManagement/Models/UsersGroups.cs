@@ -11,5 +11,6 @@ namespace LocalMealManagement.Models
         public int Id { get; set; }
         public virtual Groups Groups { get; set; }
         public virtual IdentityUser IdentityUser { get; set; }
+        public virtual IdentityRole IdentityRole { get; set; }
     }
 }

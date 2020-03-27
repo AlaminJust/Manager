@@ -36,12 +36,22 @@ namespace LocalMealManagement
             services.AddControllersWithViews();
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("SuparAdmin", policy =>
+                options.AddPolicy("Admin", policy =>
                 {
-                    policy.AddRequirements( new ManageAdminRollAndClaimsRequirement());
+                    policy.AddRequirements(new ManageAdminRollAndClaimsRequirement());
+                });
+                options.AddPolicy("Member", policy =>
+                {
+                    policy.AddRequirements(new ManageMemberRollAndClaimsRequirment());
+                });
+                options.AddPolicy("Manager", policy =>
+                {
+                    policy.AddRequirements(new ManageManagerRoleAndClaimRequirement());
                 });
             });
             services.AddScoped<IAuthorizationHandler, IsGroupAdmin>();
+            services.AddScoped<IAuthorizationHandler, IsGroupMember>();
+            services.AddScoped<IAuthorizationHandler, IsGroupManager>();
             services.AddScoped<IGroupRepository, GroupRepository>();
             services.AddScoped<IManageGroupRepository, ManageGroupRepository>();
             services.AddScoped<ISubGroupRepository, SubGroupRepository>();

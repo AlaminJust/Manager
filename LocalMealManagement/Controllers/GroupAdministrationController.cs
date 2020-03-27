@@ -44,7 +44,7 @@ namespace LocalMealManagement.Controllers
                 }
                 string currentGroupId = groupRepository.GetGroupId(model.GroupName);
                 await groupRepository.AddMember(userName, currentGroupId);
-                await groupRepository.AssignUserInRole(userName, "SuparAdmin");
+                await groupRepository.AssignUserInGroupRole(userName,"Admin",currentGroupId);
             }
             return RedirectToAction("AllGroups");
         }
@@ -63,7 +63,7 @@ namespace LocalMealManagement.Controllers
                 return View(groups);
             }
         }
-        [Authorize(Policy = "SuparAdmin")]
+        [Authorize(Policy = "Member")]
         public IActionResult SpecificGroupTask(string groupId)
         {
             ViewBag.groupId = groupId;

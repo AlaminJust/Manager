@@ -20,15 +20,16 @@ namespace LocalMealManagement.Controllers
             this.manageGroupRepository = manageGroupRepository;
             this.subGroupRepository = subGroupRepository;
         }
+        
         [HttpGet]
-        [Authorize(Policy = "SuparAdmin")]
+        [Authorize(Policy = "Admin")]
         public IActionResult AddMemberInGroup(string groupId)
         {
             ViewBag.groupId = groupId;
             return View();
         }
         [HttpPost]
-        [Authorize(Policy = "SuparAdmin")]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> AddMemberInGroup(string groupId , UserNameViewModel model)
         {
             ViewBag.groupId = groupId;
@@ -47,7 +48,7 @@ namespace LocalMealManagement.Controllers
             return View(model);
         }
         [HttpGet]
-        [Authorize(Policy = "SuparAdmin")]
+        [Authorize(Policy = "Admin")]
         public IActionResult MembersInGroup(string groupId, string subGroupId="NULL")
         {
             ViewBag.groupId = groupId;
@@ -56,7 +57,7 @@ namespace LocalMealManagement.Controllers
             return View(users);
         }
         [HttpGet]
-        [Authorize(Policy = "SuparAdmin")]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> KickOutUserFromGroup(string userId , int? groupId)
         {
             if(userId == null || groupId == null)

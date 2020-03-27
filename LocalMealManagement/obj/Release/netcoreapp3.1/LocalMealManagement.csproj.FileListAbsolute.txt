@@ -160,3 +160,6 @@ C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Release\
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Release\netcoreapp3.1\LocalMealManagement.csproj.CopyComplete
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Release\netcoreapp3.1\LocalMealManagement.dll
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Release\netcoreapp3.1\LocalMealManagement.pdb
+C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Release\netcoreapp3.1\Razor\Views\GroupAdministration\AddCost.cshtml.g.cs
+C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Release\netcoreapp3.1\Razor\Views\ManageGroup\AllCalculation.cshtml.g.cs
+C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Release\netcoreapp3.1\Razor\Views\ManageGroup\CostList.cshtml.g.cs

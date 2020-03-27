@@ -15,29 +15,27 @@ namespace LocalMealManagement.Secuirity
     {
         private readonly AppDbContext appDbContext;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public IsGroupAdmin(IHttpContextAccessor httpContextAccessor , AppDbContext appDbContext)
+        public IsGroupAdmin(AppDbContext appDbContext, IHttpContextAccessor _httpContextAccessor) 
         {
-
-            this._httpContextAccessor = httpContextAccessor;
             this.appDbContext = appDbContext;
+            this._httpContextAccessor = _httpContextAccessor;
         }
-
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, ManageAdminRollAndClaimsRequirement requirement)
         {
             var authFilterContext = _httpContextAccessor.HttpContext.Request;
-            if(authFilterContext == null)
+            if (authFilterContext == null)
             {
                 return Task.CompletedTask;
             }
             string ID = authFilterContext.Query["groupId"].ToString();
             var currentUser = _httpContextAccessor.HttpContext.User.Identity.Name;
-            
-            var res = appDbContext.usersGroups.Where(x => x.Groups.GroupId.ToString() == ID && x.IdentityUser.UserName == currentUser).FirstOrDefault();
+
+            var res = appDbContext.usersGroups.Where(x => x.Groups.GroupId.ToString() == ID && x.IdentityUser.UserName == currentUser && x.IdentityRole.Name == "Admin").FirstOrDefault();
             if (currentUser == null || res == null)
             {
                 return Task.CompletedTask;
             }
-            if (context.User.IsInRole("SuparAdmin") && context.User.IsInRole("Admin"))
+            else
             {
                 context.Succeed(requirement);
             }
@@ -45,6 +43,9 @@ namespace LocalMealManagement.Secuirity
         }
     }
 }
+
+
+
 
 
 //} for version below 3.00

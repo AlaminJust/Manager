@@ -13,12 +13,14 @@ namespace LocalMealManagement.Services
         private readonly AppDbContext context;
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager; 
         public GroupRepository(AppDbContext Context , UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            SignInManager<IdentityUser> signInManager , RoleManager<IdentityRole> roleManager)
         {
-            context = Context;
+            this.context = Context;
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.roleManager = roleManager;
         }
 
         public async Task<Boolean> AddMember(string userName, string groupId)
@@ -65,6 +67,24 @@ namespace LocalMealManagement.Services
                                 EndDate = (DateTime)sg.EndDate
                             }).ToList();
             return subgroups;
+        }
+
+        public async Task<bool> AssignUserInGroupRole(string userName, string RoleName, string groupId)
+        {
+            var user = await userManager.FindByNameAsync(userName);
+            if (user == null) return false;
+            var role = await roleManager.FindByNameAsync(RoleName);
+            if (role == null) return false;
+            var group = context.groups.Where(x => x.GroupId.ToString() == groupId).FirstOrDefault();
+            if (group == null) return false;
+            var userGroup = new UsersGroups
+            {
+                Groups = group,
+                IdentityUser = user,
+                IdentityRole = role
+            };
+            await context.usersGroups.AddAsync(userGroup);
+            return await save();
         }
 
         public async Task<Boolean> AssignUserInRole(string userName, string RoleName)

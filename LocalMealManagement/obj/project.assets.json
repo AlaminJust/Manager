@@ -8540,7 +8540,8 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\BS359\\.nuget\\packages\\": {}
+    "C:\\Users\\BS359\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
@@ -8551,6 +8552,9 @@
       "packagesPath": "C:\\Users\\BS359\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\BS359\\source\\repos\\LocalMealManagement\\LocalMealManagement\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
         "C:\\Users\\BS359\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"

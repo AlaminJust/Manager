@@ -12,6 +12,7 @@ namespace LocalMealManagement.Services
         public Task<Boolean> CreateGroup(string groupName);
         public Task<Boolean> AddMember(string userName , string groupId);
         public Task<Boolean> AssignUserInRole(string userName , string RoleName);
+        public Task<Boolean> AssignUserInGroupRole(string userName, string RoleName, string groupId);
         public string GetGroupId(string groupName);
         public Task<List<Groups>> AllGroupOfUser(string UserName);
         public List<SubGroupViewModel> AllSubGroupsInAGroup(string groupId); 
