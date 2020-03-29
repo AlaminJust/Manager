@@ -41,12 +41,11 @@ namespace LocalMealManagement.Services
                 result = "Groupname is invalid!";
                 return result;
             }
-            if (!(await groupRepository.AddMember(userName, groupId)))
+            if (!(await groupRepository.AssignUserInGroupRole (userName, "Member" , groupId)))
             {
                 result = "Somethings went wrong check it carefully!";
                 return result;
             }
-            await groupRepository.AssignUserInGroupRole(userName, "Member", groupId);
             return result;
         }
 
@@ -73,7 +72,7 @@ namespace LocalMealManagement.Services
         public List<UserViewModel> UsersInGroup(string groupId , string subGroupId) 
         {
             var result = (from ug in context.usersGroups
-                          where (ug.Groups.GroupId.ToString() == groupId)
+                          where (ug.Groups.GroupId.ToString() == groupId && ug.IdentityRole.Name == "Member")
                           select new UserViewModel
                           {
                               UserId = ug.IdentityUser.Id,

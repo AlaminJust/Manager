@@ -163,3 +163,4 @@ C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Release\
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Release\netcoreapp3.1\Razor\Views\GroupAdministration\AddCost.cshtml.g.cs
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Release\netcoreapp3.1\Razor\Views\ManageGroup\AllCalculation.cshtml.g.cs
 C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Release\netcoreapp3.1\Razor\Views\ManageGroup\CostList.cshtml.g.cs
+C:\Users\BS359\source\repos\LocalMealManagement\LocalMealManagement\obj\Release\netcoreapp3.1\Razor\Views\Account\AccessDenied.cshtml.g.cs

@@ -74,7 +74,7 @@ namespace LocalMealManagement.Services
             SubGroups subGroups = new SubGroups
             {
                 SubGroupName = model.SubGroupName,
-                CreateDate = DateTime.Now,
+                CreateDate = model.CreateDate,
                 StartDate = model.StartDate,
                 EndDate = model.EndDate,
                 Groups = groups,

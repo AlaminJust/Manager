@@ -20,14 +20,13 @@ namespace LocalMealManagement.Secuirity
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, ManageManagerRoleAndClaimRequirement requirement)
         {
             var authFilterContext = _httpContextAccessor.HttpContext.Request;
-            if (authFilterContext == null)
+            if(authFilterContext == null)
             {
                 return Task.CompletedTask;
             }
             string ID = authFilterContext.Query["groupId"].ToString();
             var currentUser = _httpContextAccessor.HttpContext.User.Identity.Name;
-
-            var res = appDbContext.usersGroups.Where(x => x.Groups.GroupId.ToString() == ID && x.IdentityUser.UserName == currentUser && x.IdentityRole.Name == "Member").FirstOrDefault();
+            var res = appDbContext.usersGroups.Where(x => x.Groups.GroupId.ToString() == ID && x.IdentityUser.UserName == currentUser && x.IdentityRole.Name == "Manager").FirstOrDefault();
             if (currentUser == null || res == null)
             {
                 return Task.CompletedTask;
@@ -36,9 +35,7 @@ namespace LocalMealManagement.Secuirity
             {
                 context.Succeed(requirement);
             }
-
             return Task.CompletedTask;
         }
     }
-
 }

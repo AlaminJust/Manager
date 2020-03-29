@@ -16,7 +16,7 @@ namespace LocalMealManagement.Secuirity
         private readonly AppDbContext appDbContext;
         private readonly IHttpContextAccessor _httpContextAccessor;
         public IsGroupAdmin(AppDbContext appDbContext, IHttpContextAccessor _httpContextAccessor) 
-        {
+        {   
             this.appDbContext = appDbContext;
             this._httpContextAccessor = _httpContextAccessor;
         }
@@ -66,5 +66,4 @@ namespace LocalMealManagement.Secuirity
 //        context.Succeed(requirement);
 //    }
 //    return Task.CompletedTask;
-
 //}

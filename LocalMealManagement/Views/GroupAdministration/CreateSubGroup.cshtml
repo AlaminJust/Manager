@@ -1,20 +1,14 @@
 ﻿@model LocalMealManagement.ViewModel.CreateSubgroupViewModel
 
-@{
-    ViewData["Title"] = "CreateSubGroup";
-}
 
-<h1>CreateSubGroup</h1>
-
-<h4>CreateSubgroupViewModel</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="offset-md-4 col-md-4 shadow" style="border-radius:15px">
         <form asp-action="CreateSubGroup">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class ="form-control" />
+                <label asp-for="Id" class="control-label" hidden></label>
+                <input asp-for="Id" class ="form-control" type="hidden" value="1" />
                 <span asp-validation-for="Id" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -24,29 +18,26 @@
             </div>
             <div class="form-group">
                 <label asp-for="CreateDate" class="control-label"></label>
-                <input asp-for="CreateDate" class="form-control" />
+                <input asp-for="CreateDate" type="date" class="form-control" />
                 <span asp-validation-for="CreateDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="StartDate" class="control-label"></label>
-                <input asp-for="StartDate" class="form-control" />
+                <input asp-for="StartDate" type="time" class="form-control" />
                 <span asp-validation-for="StartDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="EndDate" class="control-label"></label>
-                <input asp-for="EndDate" class="form-control" />
+                <input asp-for="EndDate" type="time" class="form-control" />
                 <span asp-validation-for="EndDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="offset-md-4 form-group" style="position:relative; left:9px">
                 <input type="submit" asp-route-groupId="@ViewBag.groupId" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<LocalMealManagement.ViewModel.SubGroupViewModel>
-
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <div class="container">
-    <a asp-action="CreateSubGroup" asp-route-groupId="@ViewBag.groupId"  style="background-color:powderblue; margin-bottom:5px; float:right; position:relative; right:61px"><i class="fa fa-plus mr-2" aria-hidden="true" title="Create SubGroup"></i>Create SubGroup</a>
+    <a asp-action="CreateSubGroup" asp-route-groupId="@ViewBag.groupId"  style="background-color:powderblue; margin-bottom:5px; float:right; position:relative; right:30px"><i class="fa fa-plus mr-2" aria-hidden="true" title="Create SubGroup"></i>Create SubGroup</a>
 </div>
-<div class="container card-deck ">
+<div class="container card-deck ml-md-3">
     @foreach (var item in Model)
     {
         <div class="row justify-content-center">
-            <div class="col-auto mb-3">
+            <div class="col-auto mb-3 shadow">
                 <div class="card" style="width: 20rem;">
                     <div class="card-header">
                         <div class="row">
@@ -30,17 +30,16 @@
                         @*<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         *@
                     </div>
-                    <div class="card-footer text-center">
+                    <div class="card-footer text-center mb-2">
                         <a asp-controller="GroupAdministration" asp-action="MealsFormate" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" class="card-link" title="Meal Functionality"><i class='fas fa-users'></i></a>
                         <a asp-controller="ManageGroup" asp-action="MembersInGroup" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" class="card-link" title="Add Balance to members"><i class="fa fa-money" aria-hidden="true"></i></a>
                         <a asp-controller="GroupAdministration" asp-action="AddCost" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" class="card-link" title="Add All Cost Of management"><i class="fa fa-usd" aria-hidden="true"></i></a>
                         <a asp-controller="ManageGroup" asp-action="CostList" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" class="card-link" title="Cost List"><i class="fas fa-list"></i></a>
                         <a asp-controller="GroupAdministration" asp-action="AllUsersMonthlyMeals" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" asp-route-date="@item.SubGroupCreateDate" class="card-link"><i class="fas fa-hamburger" title="Monthly Meal List"></i></a>
-                        <a asp-controller="ManageGroup" asp-action="AllCalculation" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" class="card-link"><i class="fas fa-hamburger" title="All Calulation :D"></i></a>
+                        <a asp-controller="ManageGroup" asp-action="AllCalculation" asp-route-groupId="@ViewBag.groupId" asp-route-subGroupId="@item.SubGroupId" class="card-link"><i class="fa fa-calculator" aria-hidden="true" title="Meal Calculation"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     }
 </div>
-<script src='https://kit.fontawesome.com/a076d05399.js'></script>

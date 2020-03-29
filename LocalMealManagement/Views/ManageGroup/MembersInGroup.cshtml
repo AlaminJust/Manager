@@ -11,22 +11,22 @@
         <thead>
             <tr>
                 <th>
-                    UserId
+                    Username
                 </th>
                 <th>
-                    UserName
+                    Action
                 </th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
             @{
                 string groupId = @ViewBag.groupId;
             }
+            
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
+                    <td hidden>
                         @Html.DisplayFor(modelItem => item.UserId)
                     </td>
                     <td>
@@ -36,7 +36,7 @@
                         @if (item.subGroupId != "NULL")
                         {
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-7">
                                     <input class="form-control" id=@item.UserName placeholder="Enter Balance" onkeyup="pulsar(this)" />
                                 </div>
                                 <div class="col-md-5">

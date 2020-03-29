@@ -1,6 +1,4 @@
-﻿
-function show(subGroupID, groupid, Date) {
-    if (!confirm("Are You Sure About this Action?")) return;
+﻿function show(subGroupID, groupid, Date) {
     console.log(subGroupID, groupid, Date);
     $.ajax({
         type: "GET",

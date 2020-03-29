@@ -23,28 +23,12 @@ namespace LocalMealManagement.Services
             this.roleManager = roleManager;
         }
 
-        public async Task<Boolean> AddMember(string userName, string groupId)
-        {
-            var groups = context.groups.Where(x => x.GroupId.ToString() == groupId).FirstOrDefault();
-            if (groups == null) return false; /// groups not create
-            var users = await userManager.FindByNameAsync(userName);
-            if (users == null) return false;  /// username is not exist
-            UsersGroups usersGroups = new UsersGroups
-            {
-                Groups = groups,
-                IdentityUser = users
-            };
-            await context.usersGroups.AddAsync(usersGroups);  // add user and group in usergroup table
-            await save();
-            return true;
-        }
-
         public async Task< List<Groups> > AllGroupOfUser(string UserName)
         {
             var user = await userManager.FindByNameAsync(UserName);
             var groups = (from u in context.usersGroups
                           join g in context.groups on u.Groups.GroupId equals g.GroupId
-                          where (u.IdentityUser.Id == user.Id)
+                          where (u.IdentityUser.Id == user.Id && u.IdentityRole.Name == "Member")
                           select new Groups
                           {
                               GroupId = g.GroupId,

@@ -43,8 +43,9 @@ namespace LocalMealManagement.Controllers
                     return View(model);
                 }
                 string currentGroupId = groupRepository.GetGroupId(model.GroupName);
-                await groupRepository.AddMember(userName, currentGroupId);
                 await groupRepository.AssignUserInGroupRole(userName,"Admin",currentGroupId);
+                await groupRepository.AssignUserInGroupRole(userName,"Member",currentGroupId);
+                await groupRepository.AssignUserInGroupRole(userName,"Manager",currentGroupId);
             }
             return RedirectToAction("AllGroups");
         }
@@ -73,12 +74,14 @@ namespace LocalMealManagement.Controllers
 
         /// Create Subgroup
         [HttpGet]
+        [Authorize(Policy = "Manager")]
         public IActionResult CreateSubGroup(string groupId)
         {
             ViewBag.groupId = groupId;
             return View();
         }
         [HttpPost]
+        [Authorize(Policy = "Manager")]
         public async Task<IActionResult> CreateSubGroup(CreateSubgroupViewModel model , string groupId)
         {
             ViewBag.groupId = groupId;
@@ -95,13 +98,15 @@ namespace LocalMealManagement.Controllers
 
         // Generate Day Formate for giving and updating meal in the subgroups
         [HttpGet]
+        [Authorize(Policy = "Member")]
         public IActionResult MealsFormate(string subGroupId , string groupId) 
         {
             ViewBag.groupId = groupId;
-            DateTime now = DateTime.Now; 
-            int month = now.Month; 
-            int day = NumberOfDayInMonth[month]; 
-            DateTime StartDay = new DateTime(now.Year, month, 1); 
+            var subGroupCreateDate = context.subGroups.Where(x => x.Groups.GroupId.ToString() == groupId && x.Id.ToString() == subGroupId).FirstOrDefault();
+            DateTime now = subGroupCreateDate.CreateDate;
+            int month = now.Month;
+            int day = NumberOfDayInMonth[month];
+            DateTime StartDay = new DateTime(now.Year, month, 1);
             List<SubGroupMonthlyViewModel> subGroupMonthlyViewModels = new List<SubGroupMonthlyViewModel>(); 
             for(int i = 1; i<=day; i++) 
             { 
@@ -117,6 +122,7 @@ namespace LocalMealManagement.Controllers
         }
         
         [HttpGet]
+        [Authorize(Policy = "Member")]
         public IActionResult AddMeals(string groupId , string subGroupId , DateTime date)
         {
             ViewBag.groupId = groupId;
@@ -126,6 +132,7 @@ namespace LocalMealManagement.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "Member")]
         public async Task<IActionResult> AddMeals(MealModelView model , string groupId , string subGroupId, DateTime date )
         {
             ViewBag.groupId = groupId;
@@ -149,6 +156,7 @@ namespace LocalMealManagement.Controllers
         // Update Meal 
         // Group Id need for authorzation
         [HttpGet]
+        [Authorize(Policy = "Member")]
         public IActionResult UpdateMeals(string groupId, string subGroupId, DateTime date)
         {
             ViewBag.groupId = groupId;
@@ -158,6 +166,7 @@ namespace LocalMealManagement.Controllers
             return View(mealModelView);
         }
         [HttpPost]
+        [Authorize(Policy = "Member")]
         public async Task<IActionResult> UpdateMeals(MealModelView model, string groupId , string subGroupId , DateTime date)
         {
             ViewBag.groupId = groupId;
@@ -178,6 +187,7 @@ namespace LocalMealManagement.Controllers
             return View(model);
         }
         [HttpGet]
+        [Authorize(Policy = "Member")]
         public IActionResult ShowMeal(string groupId , string subGroupId , DateTime date)
         {
             MealModelView mealDetails = subGroupRepository.ShowMeal(subGroupId, User.Identity.Name, date);
@@ -195,12 +205,14 @@ namespace LocalMealManagement.Controllers
 
         // To show specific subgroups All users meals
         [HttpGet]
+        [Authorize(Policy = "Member")]
         public IActionResult SubGroupsAllUsersMeals(string groupId , string subGroupId , DateTime date)
         {
             var subGroupAllUserMeals = subGroupRepository.SubGroupAllUserMeals(subGroupId, date);
             return View(subGroupAllUserMeals);
         }
         [HttpGet]
+        [Authorize(Policy = "Member")]
         public IActionResult AllUsersMonthlyMeals(string groupId , string subGroupId , DateTime date)
         {
             var allUsersMonthlyMeals = subGroupRepository.AllUsersMonthlyMeals(subGroupId, date);
@@ -213,6 +225,7 @@ namespace LocalMealManagement.Controllers
             return View();
         }
         [HttpPost]
+        [Authorize(Policy = "Manager")]
         public async Task<IActionResult> AddCost(CostViewModel model , string groupId , string subGroupId)
         {
             if (ModelState.IsValid)

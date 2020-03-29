@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using LocalMealManagement.Models;
 using LocalMealManagement.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,11 +22,13 @@ namespace LocalMealManagement.Controllers
             this.userManager = userManager;
         }
         [HttpGet]
+        [Authorize]
         public IActionResult CreateRole()
         {
             return View();
         }
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateRole(RoleViewModel model)
         {
             if (ModelState.IsValid)

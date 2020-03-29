@@ -22,14 +22,14 @@ namespace LocalMealManagement.Controllers
         }
         
         [HttpGet]
-        [Authorize(Policy = "Admin")]
+        [Authorize(Policy = "Manager")]
         public IActionResult AddMemberInGroup(string groupId)
         {
             ViewBag.groupId = groupId;
             return View();
         }
         [HttpPost]
-        [Authorize(Policy = "Admin")]
+        [Authorize(Policy = "Manager")]
         public async Task<IActionResult> AddMemberInGroup(string groupId , UserNameViewModel model)
         {
             ViewBag.groupId = groupId;
@@ -48,7 +48,7 @@ namespace LocalMealManagement.Controllers
             return View(model);
         }
         [HttpGet]
-        [Authorize(Policy = "Admin")]
+        [Authorize(Policy = "Manager")]
         public IActionResult MembersInGroup(string groupId, string subGroupId="NULL")
         {
             ViewBag.groupId = groupId;
@@ -71,12 +71,14 @@ namespace LocalMealManagement.Controllers
             return BadRequest();
         }
         [HttpGet]
+        [Authorize(Policy = "Manager")]
         public IActionResult CostList(string groupId , string subGroupId)
         {
             var costList = subGroupRepository.CostList(subGroupId);
             return View(costList); 
         }
         [HttpGet]
+        [Authorize(Policy = "Member")]
         public IActionResult AllCalculation(string groupId , string subGroupId)
         {
             var allCalculation = subGroupRepository.allCalculations(subGroupId);

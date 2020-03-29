@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using LocalMealManagement.Services;
 using LocalMealManagement.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LocalMealManagement.Controllers
@@ -16,7 +17,8 @@ namespace LocalMealManagement.Controllers
             this.accountRepository = accountRepository;
         }
         [HttpPost]
-        public async Task<IActionResult> AddBalance(AccountViewModel model)
+        [Authorize]
+        public async Task<IActionResult> AddBalance(string groupId , AccountViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -28,6 +30,10 @@ namespace LocalMealManagement.Controllers
             }
             ModelState.AddModelError("", "Something Going Wrong");
             return View(model);
+        }
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }
